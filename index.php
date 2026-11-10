@@ -34,8 +34,8 @@ require_once __DIR__ . '/includes/header.php';
             <div class="hero-shape hero-shape-1"></div>
             <div class="hero-shape hero-shape-2"></div>
             <div class="hero-image">
-                <!-- صورة تجريبية من الإنترنت مؤقتاً -->
-                <img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=1000&auto=format&fit=crop" alt="مجموعة الأزياء الجديدة">
+                <!-- صورة جديدة: أنيقة، محتشمة، وعمودية -->
+                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=800&h=1000&fit=crop" alt="مجموعة الأزياء الجديدة">
             </div>
             <div class="hero-badge">
                 <i class="fa-solid fa-award"></i>
@@ -114,8 +114,8 @@ require_once __DIR__ . '/includes/header.php';
                 <article class="product-card">
                     <div class="product-media">
                         <a href="<?= url('product.php?id=' . $p['id']) ?>">
-                            <!-- صورة تجريبية من الإنترنت مؤقتاً -->
-                            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600&auto=format&fit=crop" alt="<?= clean($p['name']) ?>" loading="lazy">
+                            <!-- صور المنتجات أيضاً -->
+                            <img src="https://images.unsplash.com/photo-1583391733958-37943d52b2b8?q=80&w=600&auto=format&fit=crop" alt="<?= clean($p['name']) ?>" loading="lazy">
                         </a>
                         <?php if (!empty($p['old_price'])): ?>
                             <span class="badge badge-sale">
