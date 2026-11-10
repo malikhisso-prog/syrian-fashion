@@ -1,0 +1,68 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "فستان سهرة مطرز بالكريستال",
+      "category": "dresses",
+      "category_name": "فساتين",
+      "price": 850000,
+      "old_price": 1000000,
+      "image": "product-1.jpg",
+      "featured": true,
+      "new": true,
+      "stock": 12,
+      "sizes": ["S", "M", "L", "XL"],
+      "colors": ["أسود", "كحلي", "خمري"],
+      "description": "فستان سهرة فاخر مطرز يدوياً بالكريستال، بقصة انسيابية أنيقة تناسب المناسبات الخاصة.",
+      "rating": 5
+    },
+    {
+      "id": 2,
+      "name": "عباية كلاسيكية بقماش الكريب",
+      "category": "abayas",
+      "category_name": "عبايات",
+      "price": 420000,
+      "old_price": null,
+      "image": "product-2.jpg",
+      "featured": true,
+      "new": false,
+      "stock": 25,
+      "sizes": ["M", "L", "XL", "XXL"],
+      "colors": ["أسود", "بيج", "رمادي"],
+      "description": "عباية أنيقة بقماش كريب عالي الجودة، تصميم بسيط وراقٍ يناسب كل المناسبات.",
+      "rating": 5
+    },
+    {
+      "id": 3,
+      "name": "بلوزة حرير بأكمام منفوخة",
+      "category": "blouses",
+      "category_name": "بلوزات",
+      "price": 280000,
+      "old_price": 350000,
+      "image": "product-3.jpg",
+      "featured": true,
+      "new": true,
+      "stock": 18,
+      "sizes": ["XS", "S", "M", "L"],
+      "colors": ["أبيض", "وردي", "أزرق"],
+      "description": "بلوزة من الحرير الطبيعي بأكمام منفوخة عصرية، مثالية للإطلالات النهارية والمسائية.",
+      "rating": 4
+    },
+    {
+      "id": 4,
+      "name": "طقم إكسسوارات ذهبي",
+      "category": "accessories",
+      "category_name": "إكسسوارات",
+      "price": 195000,
+      "old_price": null,
+      "image": "product-4.jpg",
+      "featured": true,
+      "new": false,
+      "stock": 30,
+      "sizes": ["One Size"],
+      "colors": ["ذهبي", "فضي"],
+      "description": "طقم إكسسوارات أنيق مطلي بالذهب، يضم قلادة وأقراط وأسورة بتصميم متناسق.",
+      "rating": 5
+    }
+  ]
+}
