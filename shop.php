@@ -5,16 +5,13 @@ require_once __DIR__ . '/includes/functions.php';
 $pageTitle = 'المتجر';
 $pageDesc  = 'تسوقي أحدث تشكيلات الأزياء السورية. فساتين، عبايات، بلوزات وإكسسوارات.';
 
-// جلب كل المنتجات
 $products = getProducts();
 
-// فلترة حسب التصنيف (إذا تم اختياره)
 $currentCat = $_GET['cat'] ?? '';
 if ($currentCat) {
     $products = array_filter($products, fn($p) => $p['category'] === $currentCat);
 }
 
-// البحث (إذا تم إدخال كلمة)
 $search = $_GET['q'] ?? '';
 if ($search) {
     $search = trim($search);
@@ -24,7 +21,6 @@ if ($search) {
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<!-- ═══════ PAGE HEADER ═══════ -->
 <section class="page-header">
     <div class="container">
         <h1 class="page-title">المتجر</h1>
@@ -32,10 +28,8 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 </section>
 
-<!-- ═══════ SHOP CONTENT ═══════ -->
 <section class="shop section section-light">
     <div class="container">
-        <!-- Filters -->
         <div class="shop-filters">
             <div class="filter-categories">
                 <a href="<?= url('shop.php') ?>" class="filter-btn <?= empty($currentCat) ? 'active' : '' ?>">الكل</a>
@@ -52,7 +46,6 @@ require_once __DIR__ . '/includes/header.php';
             </div>
         </div>
 
-        <!-- Products Grid -->
         <?php if (empty($products)): ?>
             <div class="empty-state">
                 <i class="fa-solid fa-box-open"></i>
@@ -66,8 +59,7 @@ require_once __DIR__ . '/includes/header.php';
                     <article class="product-card">
                         <div class="product-media">
                             <a href="<?= url('product.php?id=' . $p['id']) ?>">
-                                <!-- صورة تجريبية مؤقتة -->
-                                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600&auto=format&fit=crop" alt="<?= clean($p['name']) ?>" loading="lazy">
+                                <img src="<?= productImage($p['image']) ?>" alt="<?= clean($p['name']) ?>" loading="lazy">
                             </a>
                             <?php if (!empty($p['old_price'])): ?>
                                 <span class="badge badge-sale">
