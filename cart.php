@@ -11,7 +11,6 @@ $total = cartTotal();
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<!-- ═══════ BREADCRUMB ═══════ -->
 <div class="breadcrumb-bar">
     <div class="container">
         <nav class="breadcrumb">
@@ -22,7 +21,6 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 </div>
 
-<!-- ═══════ CART SECTION ═══════ -->
 <section class="cart-section section">
     <div class="container">
         <h1 class="page-title text-right">سلة التسوق</h1>
@@ -36,8 +34,6 @@ require_once __DIR__ . '/includes/header.php';
             </div>
         <?php else: ?>
             <div class="cart-layout">
-                
-                <!-- Products Table -->
                 <div class="cart-items">
                     <div class="cart-table-header">
                         <span>المنتج</span>
@@ -49,7 +45,7 @@ require_once __DIR__ . '/includes/header.php';
                     <?php foreach ($cart as $id => $item): ?>
                         <div class="cart-item" id="cart-item-<?= $id ?>">
                             <div class="cart-item-info">
-                                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=200&auto=format&fit=crop" alt="<?= clean($item['name']) ?>">
+                                <img src="<?= productImage($item['image'] ?? '') ?>" alt="<?= clean($item['name']) ?>">
                                 <div>
                                     <h3><?= clean($item['name']) ?></h3>
                                 </div>
@@ -74,7 +70,6 @@ require_once __DIR__ . '/includes/header.php';
                     <?php endforeach; ?>
                 </div>
 
-                <!-- Cart Summary -->
                 <div class="cart-summary">
                     <h2>ملخص الطلب</h2>
                     <div class="summary-row">
@@ -106,6 +101,7 @@ require_once __DIR__ . '/includes/header.php';
         if (newQty < 1) return;
         fetch('<?= url('cart_action.php') ?>', {
             method: 'POST',
+            credentials: 'same-origin',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: 'action=update&id=' + productId + '&qty=' + newQty
         })
@@ -121,6 +117,7 @@ require_once __DIR__ . '/includes/header.php';
         if (!confirm('هل أنت متأكد من حذف هذا المنتج؟')) return;
         fetch('<?= url('cart_action.php') ?>', {
             method: 'POST',
+            credentials: 'same-origin',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: 'action=remove&id=' + productId
         })
