@@ -65,9 +65,15 @@ function url(string $path = ''): string {
 }
 
 /**
- * رابط صورة المنتج
+ * رابط صورة المنتج (يدعم روابط كاملة أو اسم ملف محلي)
  */
 function productImage(string $filename): string {
+    if ($filename === '') {
+        return 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600&auto=format&fit=crop';
+    }
+    if (str_starts_with($filename, 'http://') || str_starts_with($filename, 'https://')) {
+        return $filename;
+    }
     return url('assets/images/products/' . $filename);
 }
 

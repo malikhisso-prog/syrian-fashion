@@ -4,15 +4,30 @@
 (function () {
     'use strict';
 
-    const SITE_URL = window.location.origin + '/syrian_fashion';
+    // الرابط الأساسي يجي من PHP (header.php)
+    const SITE_URL = (window.SITE_URL || window.location.origin).replace(/\/$/, '');
 
     // ── Mobile Menu ──
     const menuToggle = document.getElementById('menuToggle');
     const mainNav    = document.getElementById('mainNav');
     if (menuToggle && mainNav) {
-        menuToggle.addEventListener('click', () => {
+        const closeMenu = () => {
+            mainNav.classList.remove('open');
+            menuToggle.classList.remove('active');
+        };
+
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
             mainNav.classList.toggle('open');
             menuToggle.classList.toggle('active');
+        });
+
+        // إغلاق القائمة عند الضغط على أي رابط
+        mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+        // إغلاق القائمة عند الضغط خارجها
+        document.addEventListener('click', (e) => {
+            if (!mainNav.contains(e.target) && !menuToggle.contains(e.target)) closeMenu();
         });
     }
 
@@ -49,6 +64,36 @@
         });
     }
 
+    // ── Update Cart Count ──
+    function updateCartCount(count) {
+        const cartBtn = document.querySelector('.cart-btn');
+        if (!cartBtn) return;
+        let badge = cartBtn.querySelector('.cart-count');
+        if (!badge) {
+            badge = document.createElement('span');
+            badge.className = 'cart-count';
+            cartBtn.appendChild(badge);
+        }
+        badge.textContent = count;
+        badge.style.display = count > 0 ? 'flex' : 'none';
+    }
+    window.updateCartCount = updateCartCount;
+
+    // ── Toast ──
+    function showToast(message, type = 'success') {
+        let toast = document.getElementById('appToast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'appToast';
+            toast.className = 'toast';
+            document.body.appendChild(toast);
+        }
+        toast.textContent = message;
+        toast.className = 'toast toast-' + type + ' show';
+        clearTimeout(toast._timer);
+        toast._timer = setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
     // ── Add to Cart (AJAX) ──
     window.addToCart = function (productId, btn) {
         const originalHTML = btn.innerHTML;
@@ -57,6 +102,7 @@
 
         fetch(SITE_URL + '/cart_action.php', {
             method: 'POST',
+            credentials: 'same-origin',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: 'action=add&id=' + productId + '&qty=1'
         })
@@ -78,35 +124,6 @@
             showToast('فشل الاتصال بالخادم', 'error');
         });
     };
-
-    // ── Update Cart Count ──
-    function updateCartCount(count) {
-        const cartBtn = document.querySelector('.cart-btn');
-        if (!cartBtn) return;
-        let badge = cartBtn.querySelector('.cart-count');
-        if (!badge) {
-            badge = document.createElement('span');
-            badge.className = 'cart-count';
-            cartBtn.appendChild(badge);
-        }
-        badge.textContent = count;
-        badge.style.display = count > 0 ? 'flex' : 'none';
-    }
-
-    // ── Toast ──
-    function showToast(message, type = 'success') {
-        let toast = document.getElementById('appToast');
-        if (!toast) {
-            toast = document.createElement('div');
-            toast.id = 'appToast';
-            toast.className = 'toast';
-            document.body.appendChild(toast);
-        }
-        toast.textContent = message;
-        toast.className = 'toast toast-' + type + ' show';
-        clearTimeout(toast._timer);
-        toast._timer = setTimeout(() => toast.classList.remove('show'), 3000);
-    }
 
     // ── Scroll Reveal ──
     if ('IntersectionObserver' in window) {

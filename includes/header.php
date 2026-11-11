@@ -25,6 +25,10 @@ $pageDesc  = $pageDesc  ?? 'أزياء سورية أصيلة بلمسة عصري
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="<?= url('assets/css/style.css') ?>">
+    <link rel="stylesheet" href="<?= url('assets/css/mobile.css') ?>">
+
+    <!-- رابط الموقع للـ JavaScript -->
+    <script>window.SITE_URL = '<?= SITE_URL ?>';</script>
 </head>
 <body>
 
